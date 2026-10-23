@@ -16,22 +16,24 @@ Depois acesse http://localhost:5174.
 
 ## O que tem na página
 
-- **Abertura:** o nome com uma faixa que mostra tarefas reais do anúncio; ao rolar, a faixa se abre na tela inteira.
+- **Abertura:** o nome com uma faixa que mostra tarefas reais do anúncio. Atrás dele, em 3D, flutuam pedaços de palavras (tokens), que reagem ao mouse e são puxados pela faixa quando ela se abre na tela inteira.
 - **Menos papo, mais resposta:** a mesma resposta encolhe de 57 para 21 palavras (exemplo ilustrativo do estilo).
 - **Família Claude:** Haiku, Sonnet, Opus e Fable, com preços e datas.
 - **Novidades:** quatro mudanças, cada uma com uma foto de arquivo como metáfora.
+- **Do tamanho de uma pilha (3D):** as 680 mil linhas migradas viram uma pilha de papel que cresce com a rolagem até 11.334 folhas e 1,13 m, ao lado de uma mesa de escritório de 75 cm. Depois, uma faixa laranja percorre a pilha, mostrando a migração. Conta usada: 60 linhas por folha e 0,1 mm por folha.
 - **Seletor de esforço:** um botão giratório com os cinco níveis.
 - **Números contra o Opus 5** e **comparativo com o GPT** prova por prova, incluindo onde o GPT vence.
 - **Preço, dúvidas frequentes, fechamento e rodapé com as fontes.**
 
 ## Tecnologia
 
-HTML, CSS e JavaScript puros. Animações com [GSAP 3.13](https://gsap.com) e os plugins ScrollTrigger, ScrollSmoother, SplitText, Flip, Draggable, DrawSVG e CustomEase, carregados do jsDelivr. Tipografia Barlow Condensed e Barlow (Google Fonts). Respeita a preferência de movimento reduzido do sistema.
+HTML, CSS e JavaScript puros. Animações com [GSAP 3.13](https://gsap.com) e os plugins ScrollTrigger, ScrollSmoother, SplitText, Flip, Draggable, DrawSVG e CustomEase. Cenas 3D com [Three.js r170](https://threejs.org) (módulo ES). Tudo carregado do jsDelivr. Sem WebGL, a seção da pilha mostra uma foto no lugar da cena. Tipografia Barlow Condensed e Barlow (Google Fonts). Respeita a preferência de movimento reduzido do sistema.
 
 ```
 index.html      a página
 css/style.css   estilos
 js/main.js      interações e animações
+js/three-scenes.js  as duas cenas 3D (tokens e pilha)
 assets/         fotos e vídeo (créditos abaixo)
 ```
 

@@ -32,6 +32,7 @@
 
   <!-- Abertura: o nome com uma janela para o produto; ao rolar, a janela abre -->
   <div class="opening t-orange" id="topo">
+    <canvas class="tokens" data-tokens aria-hidden="true"></canvas>
     <section class="hero" aria-labelledby="hero-title" data-theme="orange">
       <h1 class="hero__title" id="hero-title">
         <span class="sr-only">Claude </span>
@@ -172,6 +173,31 @@
         </figure>
       </li>
     </ul>
+  </section>
+
+  <!-- A pilha de 680 mil linhas, em 3D -->
+  <section class="stack t-dark" id="pilha" aria-labelledby="stack-title" data-theme="dark" data-stack>
+    <div class="stack__stage">
+      <canvas class="stack__canvas" data-stack-canvas aria-hidden="true"></canvas>
+      <figure class="stack__fallback pic">
+        <div class="pic__frame"><img src="assets/margaret-hamilton-restaured.jpg" width="1920" height="2390" alt="Margaret Hamilton ao lado de uma pilha de listagens impressas do código do programa Apollo" loading="lazy" decoding="async"></div>
+        <figcaption>Código impresso também vira pilha: Margaret Hamilton e o código do Apollo, 1969.</figcaption>
+      </figure>
+      <div class="stack__copy">
+        <h2 class="head" id="stack-title">Do tamanho de uma pilha</h2>
+        <ul class="stack__steps">
+          <li class="stack__step is-on" data-step><strong>680 mil linhas de código.</strong> Foi o tamanho da migração que um testador fez com o Opus 5.5.</li>
+          <li class="stack__step" data-step><strong>Mais de 11 mil folhas.</strong> É quanto isso daria impresso, com 60 linhas em cada folha.</li>
+          <li class="stack__step" data-step><strong>Uma pilha de 1,13 metro.</strong> Com 0,1 mm por folha, ela passa da altura de uma mesa de escritório.</li>
+          <li class="stack__step" data-step><strong>Pronto em menos de um dia.</strong> O Opus 5.5 fez a migração inteira; segundo a Anthropic, uma equipe levaria semanas.</li>
+        </ul>
+        <dl class="stack__meter">
+          <div><dt>Folhas</dt><dd data-stack-pages>11.334</dd></div>
+          <div><dt>Altura</dt><dd data-stack-height>1,13 m</dd></div>
+          <div><dt>Migradas</dt><dd data-stack-done>100%</dd></div>
+        </dl>
+      </div>
+    </div>
   </section>
 
   <!-- Como funciona + seletor de esforço -->
@@ -385,5 +411,6 @@
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
 <script src="js/main.js"></script>
+<script type="module" src="js/three-scenes.js"></script>
 </body>
 </html>
