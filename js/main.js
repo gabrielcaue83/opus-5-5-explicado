@@ -470,6 +470,7 @@
           if (s.progress > 0.78) autoplay();
         },
         onLeaveBack: () => setTheme('orange'),
+        onEnterBack: () => setTheme('dark'),
       },
     });
     tl.fromTo(demo, { clipPath: inset }, { clipPath: 'inset(0px 0px 0px 0px round 0px)', duration: 0.6, ease: 'power2.inOut' }, 0)
