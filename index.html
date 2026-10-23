@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Opus 5.5, explicado</title>
+  <meta name="description" content="O que mudou no Claude Opus 5.5, explicado sem jargão: novidades, comparação com outros modelos Claude e com o GPT, preço e segurança.">
+  <meta name="theme-color" content="#ff7a1f">
+  <script>document.documentElement.classList.add('js')</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23ff7a1f'/%3E%3Ctext x='16' y='23' font-family='Arial Narrow,Arial' font-weight='700' font-size='16' text-anchor='middle' fill='%23050f16'%3E5.5%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+
+<header class="top" data-top data-theme="orange">
+  <a class="top__mark" href="#topo">Opus 5.5, explicado</a>
+  <nav class="top__nav" aria-label="Seções">
+    <a class="link" href="#novidades">Novidades</a>
+    <a class="link" href="#comparativo">Comparativo</a>
+    <a class="link" href="#preco">Preço</a>
+    <a class="link" href="#perguntas">Dúvidas</a>
+  </nav>
+  <a class="button button--small" href="https://claude.ai"><span class="button__label"><span data-label="Testar no Claude">Testar no Claude</span></span></a>
+</header>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main>
+
+  <!-- Abertura: o nome com uma janela para o produto; ao rolar, a janela abre -->
+  <div class="opening t-orange" id="topo">
+    <section class="hero" aria-labelledby="hero-title" data-theme="orange">
+      <h1 class="hero__title" id="hero-title">
+        <span class="sr-only">Claude </span>
+        <span class="hero__word" data-hero-word>Opus</span>
+        <span class="hero__slot" aria-hidden="true">
+          <span class="strip" data-ui data-strip>
+            <span class="strip__item is-on" data-ask="Migrar 680 mil linhas de código" data-done="Feito em menos de um dia"></span>
+            <span class="strip__item" data-ask="Auditar e corrigir 200 mil linhas" data-done="Pronto em menos de 3 horas"></span>
+            <span class="strip__item" data-ask="Acelerar todas as páginas de um app" data-done="Deu certo em 39 de 40 tentativas"></span>
+          </span>
+        </span>
+        <span class="hero__word" data-hero-word>5.5</span>
+      </h1>
+      <div class="hero__foot">
+        <p class="hero__lead">O novo modelo de IA da Anthropic, explicado sem jargão: o que mudou, quanto custa e como ele se compara ao GPT.</p>
+        <a class="button hero__cta" href="https://claude.ai"><span class="button__label"><span data-label="Testar no Claude">Testar no Claude</span></span></a>
+      </div>
+    </section>
+
+    <section class="demo t-dark" id="menos-papo" aria-labelledby="demo-title" data-theme="dark">
+      <div class="demo__inner">
+        <div class="demo__text">
+          <h2 class="head demo__title" id="demo-title" data-part>Menos papo, mais resposta</h2>
+          <p class="lead" data-part>A mudança que mais se sente no dia a dia: o Opus 5.5 põe o mais importante na primeira frase e corta a enrolação. Segundo a Anthropic, as respostas ficaram 40% menos prolixas, sem perder precisão.</p>
+          <div class="toggle" role="group" aria-label="Comparar dois estilos de resposta" data-part>
+            <button type="button" class="toggle__btn" data-mode="long" aria-pressed="true">Estilo prolixo</button>
+            <button type="button" class="toggle__btn" data-mode="short" aria-pressed="false">Estilo Opus 5.5</button>
+          </div>
+          <p class="demo__count" data-part><span class="demo__num" data-count>57</span> palavras na resposta</p>
+        </div>
+
+        <figure class="chat" data-ui data-part>
+          <div class="chat__bar"><span class="chat__name">Conversa de exemplo</span><span class="chat__model" data-model-label>estilo prolixo</span></div>
+          <p class="chat__q">Meu celular está sem espaço. O que eu faço?</p>
+          <p class="chat__a is-long" data-answer><span data-role="filler">Ótima pergunta! Existem várias coisas que podem ajudar nesse caso, e vale a pena ver com calma. Antes de tudo, é importante lembrar que cada aparelho é diferente. Dito isso,</span> <span data-role="key" data-cap="Apagar">apagar</span> <span data-role="key">vídeos repetidos do WhatsApp é o que mais costuma liberar espaço.</span> <span data-role="keep">Depois, confira em Ajustes › Armazenamento o que ocupa mais.</span> <span data-role="filler">Se quiser, posso detalhar outras opções!</span></p>
+          <figcaption class="chat__note">Exemplo ilustrativo, escrito para mostrar a diferença de estilo.</figcaption>
+        </figure>
+      </div>
+    </section>
+  </div>
+
+  <!-- O que é -->
+  <section class="intro t-white" id="o-que-e" aria-labelledby="intro-title" data-theme="white">
+    <h2 class="intro__title" id="intro-title">
+      <span class="intro__l1" data-intro-line>Um colega que</span>
+      <span class="intro__l2" data-intro-line><span class="intro__ink">leu quase tudo</span><span class="intro__paper" aria-hidden="true">leu quase tudo</span></span>
+    </h2>
+    <figure class="intro__photo pic" data-pic>
+      <div class="pic__frame"><img src="assets/real-gabinete-portugues-de-leitura-8735773218.jpg" width="1920" height="1273" alt="Salão principal do Real Gabinete Português de Leitura, no Rio de Janeiro, com estantes de livros do chão ao teto" decoding="async" data-drift></div>
+      <figcaption>Real Gabinete Português de Leitura, Rio de Janeiro.</figcaption>
+    </figure>
+    <div class="intro__text">
+      <p class="lead" data-rise>Um modelo de linguagem é um programa que aprendeu a ler e escrever estudando uma montanha de textos. Você escreve do seu jeito; ele entende e responde.</p>
+      <p data-rise>O Opus 5.5 é a versão mais nova do modelo grande do Claude, lançada pela Anthropic em 22 de setembro de 2026. Ele conversa, escreve, resume documentos, lê imagens e gráficos, e programa. Dá para usar no site claude.ai, nos aplicativos e, para quem desenvolve, pela API.</p>
+    </div>
+    <figure class="intro__clip pic" data-pic>
+      <div class="pic__frame"><video autoplay muted loop playsinline preload="metadata" poster="assets/olivetti-dora-portable-typewriter-poster.jpg" width="854" height="480" aria-hidden="true" data-loop><source src="assets/olivetti-dora-portable-typewriter.webm" type="video/webm"></video></div>
+      <figcaption>Máquina de escrever Olivetti Dora, anos 1960.</figcaption>
+    </figure>
+  </section>
+
+  <!-- Família Claude -->
+  <section class="family t-orange" id="familia" aria-labelledby="family-title" data-theme="orange">
+    <h2 class="head family__title" id="family-title" data-split>Onde ele fica na família Claude</h2>
+    <div class="family__body">
+      <dl class="family__facts" data-rise>
+        <div><dt>Lançamento</dt><dd>22 de setembro de 2026</dd></div>
+        <div><dt>Nome técnico</dt><dd><code>claude-opus-5-5</code></dd></div>
+        <div><dt>Onde usar</dt><dd>claude.ai, apps, Claude Code, API, AWS, Google Cloud e Azure</dd></div>
+      </dl>
+      <div class="family__text">
+        <p class="statement" data-rise><img class="dropcap" src="assets/olympia-simplex.jpg" width="1920" height="1280" alt="Máquina de escrever Olympia Simplex, de 1935" loading="lazy" decoding="async"><strong>O Claude vem em tamanhos, como café.</strong> Haiku é o expresso, rápido e barato. Sonnet, o do dia a dia. Opus, o caprichado. E Fable, a linha de topo.</p>
+        <p class="lead family__lead" data-rise>A novidade: o Opus 5.5 chega ao nível do Fable 5.1 na maior parte do trabalho, custando menos que ele e 40% menos que o Opus 5.</p>
+        <div class="table-wrap" data-rise>
+          <table class="family__table">
+            <caption class="sr-only">Modelos da família Claude em outubro de 2026</caption>
+            <thead>
+              <tr><th scope="col">Modelo</th><th scope="col">Para que serve</th><th scope="col">Preço na API, por milhão de tokens (ler / escrever)</th><th scope="col">Lançamento</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Haiku 5.5</th><td data-label="Para quê">Tarefas simples e em grande volume, pelo menor custo</td><td class="nums" data-label="Preço">US$ 0,10 / 0,50*</td><td data-label="Lançamento">7 out. 2026</td></tr>
+              <tr><th scope="row">Sonnet 5.5</th><td data-label="Para quê">O dia a dia: rápido e equilibrado</td><td class="nums" data-label="Preço">US$ 2 / 10</td><td data-label="Lançamento">28 set. 2026</td></tr>
+              <tr class="is-you"><th scope="row">Opus 5.5</th><td data-label="Para quê">Trabalho complexo e longo, com mais capricho</td><td class="nums" data-label="Preço">US$ 4 / 20</td><td data-label="Lançamento">22 set. 2026</td></tr>
+              <tr><th scope="row">Fable 5.1</th><td data-label="Para quê">A linha de topo, acima do Opus</td><td data-label="Preço">Mais caro que o Opus</td><td data-label="Lançamento">set. 2026</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small soft family__note">*No Haiku 5.5, para pedidos de até 100 mil tokens. Para o Sonnet 5.5, a própria Anthropic diz que o Opus 5.5 segue claramente mais forte em trabalhos abertos que pedem julgamento.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Novidades -->
+  <section class="features t-white" id="novidades" aria-labelledby="features-title" data-theme="white">
+    <div class="features__intro">
+      <h2 class="head" id="features-title" data-split>O que muda, na prática</h2>
+      <p class="lead" data-rise>Quatro mudanças que aparecem no uso, com os números que a Anthropic publicou no lançamento.</p>
+    </div>
+    <ul class="rows">
+      <li class="row">
+        <div class="row__text">
+          <h3 class="title" data-split>Vai direto ao ponto</h3>
+          <p data-rise>Põe a informação principal logo na primeira frase e corta rodeios, jargão e aquelas pendências soltas no fim. Nos testes, as respostas ficaram 40% menos prolixas sem perder precisão. Quem testou resumiu assim: “ele escreve do jeito que eu escrevo”.</p>
+        </div>
+        <figure class="row__pic row__pic--wide pic" data-pic>
+          <div class="pic__frame"><img src="assets/western-union-telegram-to-jane-judge-of.jpg" width="1662" height="1027" alt="Telegrama da Western Union de 1920 com uma mensagem curta, em letras maiúsculas" loading="lazy" decoding="async" data-drift></div>
+          <figcaption>Telegrama de 1920 sobre o voto feminino nos EUA. Cada palavra custava dinheiro.</figcaption>
+        </figure>
+      </li>
+      <li class="row">
+        <div class="row__text">
+          <h3 class="title" data-split>Aguenta trabalhos enormes</h3>
+          <p data-rise>Um testador migrou 680 mil linhas de código em menos de um dia, serviço que levaria semanas para uma equipe. Outro auditou e corrigiu 200 mil linhas em menos de três horas; o Opus 5 precisou de mais de vinte.</p>
+        </div>
+        <figure class="row__pic row__pic--tall pic" data-pic>
+          <div class="pic__frame"><img src="assets/margaret-hamilton-restaured.jpg" width="1920" height="2390" alt="Margaret Hamilton ao lado de uma pilha de listagens impressas do código do programa Apollo, mais alta que ela" loading="lazy" decoding="async" data-drift></div>
+          <figcaption>Margaret Hamilton e o código do Apollo, 1969. Impressas, 680 mil linhas dariam mais de 11 mil páginas.</figcaption>
+        </figure>
+      </li>
+      <li class="row">
+        <div class="row__text">
+          <h3 class="title" data-split>Responde mais rápido</h3>
+          <p data-rise>Gera texto mais de 30% mais rápido que o Opus 5. Para quem tem pressa, existe ainda um modo rápido, no Claude Code e na plataforma de desenvolvedores, que chega a 2,5 vezes a velocidade, cobrando mais por isso.</p>
+        </div>
+        <figure class="row__pic row__pic--square pic" data-pic>
+          <div class="pic__frame"><img src="assets/stoppuhr-hanhart.jpg" width="1920" height="2372" alt="Cronômetro mecânico Hanhart com mostrador branco e botões coloridos" loading="lazy" decoding="async" data-drift></div>
+          <figcaption>Cronômetro mecânico Hanhart.</figcaption>
+        </figure>
+      </li>
+      <li class="row">
+        <div class="row__text">
+          <h3 class="title" data-split>Mais confiável</h3>
+          <p data-rise>Teve o melhor resultado da Anthropic na auditoria de comportamento, com quase 2 mil cenários. Tentou burlar limites de segurança 85% menos que o Opus 5 e resiste melhor à injeção de comandos, o truque de esconder ordens dentro de um texto ou site.</p>
+        </div>
+        <figure class="row__pic row__pic--mid pic" data-pic>
+          <div class="pic__frame"><img src="assets/padlock.jpg" width="1722" height="1965" alt="Cadeado de ferro do século 16" loading="lazy" decoding="async" data-drift></div>
+          <figcaption>Cadeado francês do século 16, Metropolitan Museum of Art.</figcaption>
+        </figure>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Como funciona + seletor de esforço -->
+  <section class="how t-orange" id="como-funciona" aria-labelledby="how-title" data-theme="orange">
+    <div class="stair stair--1">
+      <h2 class="head" id="how-title" data-split>Como ele trabalha</h2>
+      <p data-rise>Pense num assistente muito rápido que leu de tudo. Por trás de cada resposta, acontece isto:</p>
+    </div>
+    <figure class="how__photo pic" data-pic>
+      <div class="pic__frame"><img src="assets/telegrafo-de-ordes-001-mpm-san-cibrao.jpg" width="1920" height="1280" alt="Telégrafo de máquinas de um navio, com as posições poca, media e toda no mostrador" loading="lazy" decoding="async" data-drift></div>
+      <figcaption>Telégrafo de máquinas de navio: pouca, média ou toda força. O esforço do Opus 5.5 funciona parecido.</figcaption>
+    </figure>
+    <div class="stair stair--2">
+      <h3 class="head" data-split>Você pede do seu jeito.</h3>
+      <p data-rise>Em português, como falaria com um colega. Dá para anexar PDFs, fotos, planilhas e prints de tela.</p>
+    </div>
+    <div class="stair stair--3">
+      <h3 class="head" data-split>Ele pensa antes.</h3>
+      <p data-rise>No Opus 5.5 o raciocínio fica sempre ligado: ele planeja os passos, confere o caminho e só então responde.</p>
+    </div>
+    <div class="stair stair--4">
+      <h3 class="head" data-split>Você dosa o esforço.</h3>
+      <p data-rise>São cinco níveis. Mais esforço rende respostas mais caprichadas, mas leva mais tempo e custa mais. Gire o seletor.</p>
+    </div>
+
+    <div class="dial" data-dial data-rise>
+      <div class="dial__face" role="slider" tabindex="0" aria-label="Nível de esforço" aria-valuemin="1" aria-valuemax="5" aria-valuenow="2" aria-valuetext="Médio" data-dial-face>
+        <svg viewBox="0 0 320 320" aria-hidden="true" focusable="false">
+          <path class="dial__track" d="M 56.08 220 A 120 120 0 1 1 263.92 220" />
+          <path class="dial__value" data-dial-arc d="M 56.08 220 A 120 120 0 1 1 263.92 220" />
+          <g class="dial__ticks">
+            <circle cx="30.1" cy="235" r="6" /><circle cx="30.1" cy="85" r="6" /><circle cx="160" cy="10" r="6" /><circle cx="289.9" cy="85" r="6" /><circle cx="289.9" cy="235" r="6" />
+          </g>
+          <circle class="dial__hub" cx="160" cy="160" r="78" />
+          <g class="dial__knob" data-dial-knob transform="rotate(-60 160 160)">
+            <circle cx="160" cy="160" r="150" fill="transparent" />
+            <circle class="dial__handle" cx="160" cy="40" r="21" />
+          </g>
+        </svg>
+        <span class="dial__level" data-dial-name>Médio</span>
+      </div>
+      <div class="dial__steps" role="group" aria-label="Escolher nível">
+        <button type="button" data-level="1">Baixo</button>
+        <button type="button" data-level="2" aria-pressed="true">Médio</button>
+        <button type="button" data-level="3">Alto</button>
+        <button type="button" data-level="4">Extra-alto</button>
+        <button type="button" data-level="5">Máximo</button>
+      </div>
+      <div class="dial__readout" aria-live="polite">
+        <div class="dial__text" data-level-text="1"><strong>Baixo.</strong> Para o que é simples e rápido. Mesmo no nível mais baixo, ele achou 72% dos bugs conhecidos nas revisões de código da Anthropic.</div>
+        <div class="dial__text is-on" data-level-text="2"><strong>Médio, o padrão.</strong> O ponto de equilíbrio. Nesse nível ele já supera o Opus 5 no esforço máximo, por cerca de um quinto do custo.</div>
+        <div class="dial__text" data-level-text="3"><strong>Alto.</strong> Pensa mais antes de responder. Bom para problemas com várias etapas, como montar um relatório a partir de vários arquivos.</div>
+        <div class="dial__text" data-level-text="4"><strong>Extra-alto.</strong> Para trabalhos longos e cheios de detalhes, como mexer num sistema grande sem quebrar nada.</div>
+        <div class="dial__text" data-level-text="5"><strong>Máximo.</strong> Tudo o que ele tem. É o nível usado nos testes de desempenho, como os 66,4% no Terminal-Bench 4.0.</div>
+        <div class="meter" aria-hidden="true"><span class="meter__label">Tempo e custo</span><span class="meter__bar"><span data-meter></span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Números -->
+  <section class="stats t-dark" id="numeros" aria-labelledby="stats-title" data-theme="dark">
+    <h2 class="stats__title" id="stats-title"><span class="soft" data-rise>Contra o Opus 5,</span> <span data-rise>os números</span></h2>
+    <dl class="ledger">
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="40"><span class="fig__whole">40</span><span class="fig__dec"></span></dt><dd>por cento mais barato em trabalhos típicos</dd></div>
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="30"><span class="fig__whole">30</span><span class="fig__dec"></span></dt><dd>por cento mais rápido para gerar texto (no mínimo)</dd></div>
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="2.5"><span class="fig__whole">2</span><span class="fig__dec">,5</span></dt><dd>vezes a velocidade no modo rápido</dd></div>
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="85"><span class="fig__whole">85</span><span class="fig__dec"></span></dt><dd>por cento menos tentativas de burlar limites de segurança</dd></div>
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="3"><span class="fig__whole">3</span><span class="fig__dec"></span></dt><dd>horas, no máximo, para auditar 200 mil linhas de código; o Opus 5 levou mais de 20</dd></div>
+      <div class="ledger__row" data-rise><dt class="fig" data-roll="680"><span class="fig__whole">680</span><span class="fig__dec"></span></dt><dd>mil linhas de código migradas em menos de um dia</dd></div>
+    </dl>
+  </section>
+
+  <!-- Comparativo com GPT -->
+  <section class="proof t-white" id="comparativo" aria-labelledby="proof-title" data-theme="white">
+    <div class="proof__head">
+      <h2 class="head" id="proof-title" data-split>Contra o GPT, prova por prova</h2>
+      <p class="lead" data-rise>Modelos de IA são medidos com provas padronizadas, os benchmarks. Toque no nome de uma prova para ver como cada modelo foi.</p>
+    </div>
+    <div class="proof__body">
+      <p class="names" data-names data-rise>Testado em <button type="button" data-b="0" aria-pressed="true">Terminal-Bench 4.0</button>, <button type="button" data-b="1">FrontierCode</button>, <button type="button" data-b="2">CursorBench</button>, <button type="button" data-b="3">GDPval</button>, <button type="button" data-b="4">AutomationBench</button>, <button type="button" data-b="5">Humanity’s Last Exam</button>, <button type="button" data-b="6">Terminal-Bench-Science</button>, <button type="button" data-b="7">OSWorld</button> e <button type="button" data-b="8">Chartography</button>.</p>
+
+      <div class="score" data-ui data-score aria-live="polite" data-rise>
+        <h3 class="score__name" data-score-name>Terminal-Bench 4.0</h3>
+        <p class="score__what" data-score-what>Programar sozinho usando o terminal, aquela tela de comandos do computador.</p>
+        <ul class="bars" data-bars>
+          <li class="bar bar--you"><span class="bar__who">Opus 5.5</span><span class="bar__track"><span class="bar__fill" style="--v:.664"></span></span><span class="bar__val">66,4%</span></li>
+          <li class="bar bar--claude"><span class="bar__who">Fable 5.1</span><span class="bar__track"><span class="bar__fill" style="--v:.558"></span></span><span class="bar__val">55,8%</span></li>
+          <li class="bar bar--claude"><span class="bar__who">Opus 5</span><span class="bar__track"><span class="bar__fill" style="--v:.523"></span></span><span class="bar__val">52,3%</span></li>
+          <li class="bar bar--gpt"><span class="bar__who">GPT-6 Astra</span><span class="bar__track"><span class="bar__fill" style="--v:.579"></span></span><span class="bar__val">57,9%</span></li>
+          <li class="bar bar--gpt"><span class="bar__who">GPT-5.6 Sol</span><span class="bar__track"><span class="bar__fill" style="--v:.373"></span></span><span class="bar__val">37,3%</span></li>
+        </ul>
+        <p class="score__legend small soft">Em laranja, os modelos GPT, da OpenAI. Em preto e cinza, os modelos Claude.</p>
+        <p class="score__verdict" data-score-verdict>Opus 5.5 na frente, 8,5 pontos acima do melhor GPT (GPT-6 Astra).</p>
+      </div>
+    </div>
+    <div class="proof__notes">
+      <div data-rise>
+        <h3 class="title">Onde o Opus 5.5 vence</h3>
+        <p>Em programação, trabalho de escritório e perguntas difíceis ele lidera. No modo padrão, empata com o GPT-6 Astra no Terminal-Bench custando cerca de 40% do preço, e passa o GPT-5.6 Sol no CursorBench por 11 pontos custando cerca de um terço. No índice independente da Artificial Analysis, ficou em 1º lugar, com 58 pontos.</p>
+      </div>
+      <div data-rise>
+        <h3 class="title">Onde o GPT leva vantagem</h3>
+        <p>O GPT-6 Astra ganha em automação de processos e em pesquisa científica feita por agentes. Também sai mais barato por tarefa no índice da Artificial Analysis: US$ 3,26 contra US$ 5,98. E em cibersegurança o GPT-5.6 Sol marcou 76% contra 55% na Vals AI, porque o Opus 5.5 repassa boa parte desses pedidos a um modelo mais antigo, por precaução.</p>
+      </div>
+    </div>
+    <p class="small soft proof__source">Números das provas: anúncio da Anthropic de 22 de setembro de 2026, com esforço máximo. Quando falta a barra de um modelo, ele não foi testado naquela prova.</p>
+  </section>
+
+  <!-- Preço -->
+  <section class="price t-orange" id="preco" aria-labelledby="price-title" data-theme="orange">
+    <h2 class="price__sentence" id="price-title">
+      <span class="price__line" data-price-line>1 milhão de tokens</span>
+      <span class="price__line" data-price-line>por <span class="price__tag"><span class="price__roll" data-price-roll>US$ 4</span></span></span>
+    </h2>
+    <div class="price__row">
+      <p class="lead" data-rise>Esse é o preço para ele ler. Para escrever, US$ 20 por milhão. Token é um pedaço de palavra, e um milhão deles dá vários livros grossos. No Opus 5, era US$ 5 e US$ 25.</p>
+      <div class="price__actions" data-rise>
+        <a class="button" href="https://claude.com/pricing"><span class="button__label"><span data-label="Ver planos e preços">Ver planos e preços</span></span></a>
+        <a class="link-plain" href="#perguntas">Usa só o app? Veja os limites de uso</a>
+      </div>
+    </div>
+    <div class="table-wrap" data-rise>
+      <table class="price__table">
+        <caption class="sr-only">Preços por milhão de tokens na API, Opus 5 e Opus 5.5</caption>
+        <thead><tr><th scope="col">Por milhão de tokens, na API</th><th scope="col">Opus 5</th><th scope="col">Opus 5.5</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Ler o seu pedido (entrada)</th><td class="nums">US$ 5</td><td class="nums">US$ 4</td></tr>
+          <tr><th scope="row">Escrever a resposta (saída)</th><td class="nums">US$ 25</td><td class="nums">US$ 20</td></tr>
+          <tr><th scope="row">Reler algo guardado em cache</th><td class="nums">US$ 0,50</td><td class="nums">US$ 0,20</td></tr>
+          <tr><th scope="row">Modo rápido (ler / escrever)</th><td>Não tinha</td><td class="nums">US$ 8 / 40</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- Dúvidas -->
+  <section class="faq t-white" id="perguntas" aria-labelledby="faq-title" data-theme="white">
+    <h2 class="faq__title" id="faq-title" data-split>Dúvidas de quem está começando</h2>
+    <div class="faq__list">
+      <details data-rise>
+        <summary>O que é um token?</summary>
+        <div class="faq__a"><p>É um pedaço de palavra. A IA lê e escreve em tokens, e é por eles que a API cobra. Em português, uma palavra costuma virar um ou dois tokens.</p></div>
+      </details>
+      <details data-rise>
+        <summary>Preciso pagar para usar? Onde eu uso?</summary>
+        <div class="faq__a"><p>Dá para conversar com o Claude no site claude.ai e nos aplicativos. O acesso ao Opus 5.5 e os limites mudam conforme o plano; com o lançamento, os limites de uso dos planos Pro, Max, Team e Enterprise subiram. Quem programa usa pelo Claude Code ou pela API, pagando por token, e também pela AWS, Google Cloud e Microsoft Azure.</p></div>
+      </details>
+      <details data-rise>
+        <summary>Ele é melhor que o ChatGPT?</summary>
+        <div class="faq__a"><p>Depende da tarefa. Nas provas publicadas pela Anthropic, ele vence o GPT-6 Astra e o GPT-5.6 Sol na maioria, mas perde em automação de processos e em pesquisa científica. Num índice independente ficou em 1º lugar, mas o GPT-6 Astra saiu mais barato por tarefa. O melhor teste é o seu próprio trabalho.</p></div>
+      </details>
+      <details data-rise>
+        <summary>O que muda para quem usa no dia a dia?</summary>
+        <div class="faq__a"><p>Respostas mais curtas e diretas, mais velocidade e menos vai e volta. Em tarefas longas, como organizar uma pasta de documentos ou mexer em código, ele aguenta mais tempo sem se perder.</p></div>
+      </details>
+      <details data-rise>
+        <summary>E o Sonnet 5.5 e o Haiku 5.5?</summary>
+        <div class="faq__a"><p>Já saíram. O Sonnet 5.5 chegou em 28 de setembro, mais rápido e pela metade do preço do Opus 5.5. O Haiku 5.5 chegou em 7 de outubro, para tarefas simples em grande volume, por uma fração do custo. Para trabalho complexo, o Opus 5.5 segue o mais forte dos três.</p></div>
+      </details>
+      <details data-rise>
+        <summary>Ele é seguro?</summary>
+        <div class="faq__a"><p>Segundo a Anthropic, ele teve o melhor resultado da casa na auditoria de comportamento e tentou contornar limites 85% menos que o Opus 5. Pedidos sensíveis de cibersegurança e biologia são repassados a um modelo mais antigo e mais restrito, o Opus 4.8.</p></div>
+      </details>
+    </div>
+  </section>
+
+  <!-- Fechamento -->
+  <section class="cta t-dark" id="testar" aria-labelledby="cta-title" data-theme="dark">
+    <h2 class="cta__line cta__line--top" id="cta-title" data-cta-line>Testar agora</h2>
+    <div class="cta__middle">
+      <div class="cta__choices">
+        <a class="button" href="https://claude.ai"><span class="button__label"><span data-label="Testar no Claude">Testar no Claude</span></span></a>
+        <span class="cta__or">ou</span>
+        <a class="button button--alt" href="https://www.anthropic.com/news/claude-opus-5-5"><span class="button__label"><span data-label="Ler o anúncio">Ler o anúncio</span></span></a>
+      </div>
+      <p class="cta__after">O Claude abre no navegador. O anúncio oficial, em inglês, fica no site da Anthropic.</p>
+    </div>
+    <p class="cta__line cta__line--bottom" aria-hidden="true" data-cta-line>ou ler mais?</p>
+  </section>
+</main>
+
+<footer class="foot t-orange" data-theme="orange">
+  <div class="foot__top">
+    <div class="foot__invite">
+      <h2 class="head" data-split>Mande para alguém curioso</h2>
+      <button type="button" class="button" data-copy><span class="button__label"><span data-label="Copiar o link" data-copy-label>Copiar o link</span></span></button>
+    </div>
+    <ul class="foot__links" aria-label="Fontes">
+      <li><a class="link" href="https://www.anthropic.com/news/claude-opus-5-5">Anúncio oficial do Opus 5.5</a></li>
+      <li><a class="link" href="https://www.deeplearning.ai/the-batch/claude-opus-5-5-leaps-forward">DeepLearning.AI, The Batch</a></li>
+      <li><a class="link" href="https://www.vals.ai/comparisons/anthropic_claude-opus-5-5-vs-openai_gpt-5.6-sol">Vals AI, Opus 5.5 e GPT-5.6 Sol</a></li>
+      <li><a class="link" href="https://www.pcworld.com/article/3241475/claude-opus-5-5-promises-to-cut-the-chatter.html">PCWorld, sobre o estilo mais direto</a></li>
+    </ul>
+  </div>
+  <div class="foot__legal">
+    <p>Página independente de divulgação, sem vínculo com a Anthropic. Dados públicos de setembro e outubro de 2026.</p>
+    <p class="foot__credits">Imagens: <a href="https://commons.wikimedia.org/wiki/File:%E3%83%AA%E3%82%AA%E3%81%AE%E5%B9%BB%E6%83%B3%E5%9B%B3%E6%9B%B8%E9%A4%A8_Real_Gabinete_Portugues_de_Leitura_(8735773218).jpg">Real Gabinete Português de Leitura</a>, Mayumi Ishikawa, CC BY-SA 2.0; <a href="https://commons.wikimedia.org/wiki/File:Olivetti_Dora_portable_typewriter.webm">Olivetti Dora</a>, vídeo de Erik Pålsson, CC BY 3.0; <a href="https://commons.wikimedia.org/wiki/File:Olympia_Simplex.jpg">Olympia Simplex</a>, Sammlung der Medien und Wissenschaft, CC BY 4.0; <a href="https://commons.wikimedia.org/wiki/File:Western_Union_telegram_to_Jane_Judge_of_Georgia_from_Annie_G._Wright_on_passage_of_Nineteenth_Amendment,_August_26,_1920.jpg">telegrama de 1920</a>, domínio público; <a href="https://commons.wikimedia.org/wiki/File:Margaret_Hamilton_restaured.jpg">Margaret Hamilton</a>, Draper Laboratory, restauração de Wilfredor e Yann, domínio público; <a href="https://commons.wikimedia.org/wiki/File:Stoppuhr_hanhart.jpg">cronômetro Hanhart</a>, StefanPohl, domínio público; <a href="https://www.metmuseum.org/art/collection/search/463365">cadeado</a>, The Metropolitan Museum of Art, CC0; <a href="https://commons.wikimedia.org/wiki/File:Tel%C3%A9grafo_de_ordes.001_-_MPM_San_Cibrao.jpg">telégrafo de máquinas</a>, Fernando Losada Rodríguez, CC BY-SA 4.0. Exibidas em preto e branco.</p>
+  </div>
+  <p class="foot__mark" aria-hidden="true" data-foot-mark>Opus 5.5</p>
+</footer>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Flip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/DrawSVGPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/CustomEase.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
