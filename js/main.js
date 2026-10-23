@@ -42,6 +42,143 @@
   });
 
   /* ------------------------------------------------------------
+     Preloader: a frase enrolada perde uma palavra a cada passo do
+     carregamento até sobrar "Opus 5.5"; depois a tela escura encolhe
+     e vira a faixa do título.
+     ------------------------------------------------------------ */
+  const loaderEl = $('[data-loader]');
+  const announceLoaded = () => {
+    if (window.__opusLoaded) return;
+    window.__opusLoaded = true;
+    dispatchEvent(new Event('opus:loaded'));
+  };
+  const loaderDone = (() => {
+    if (!loaderEl) { announceLoaded(); return Promise.resolve(false); }
+    if (!hasGsap || reduced() || location.hash.length > 1 || window.__opusLoaded) {
+      loaderEl.remove();
+      announceLoaded();
+      return Promise.resolve(false);
+    }
+
+    let seen = false;
+    try { seen = sessionStorage.getItem('opus-loader') === '1'; sessionStorage.setItem('opus-loader', '1'); } catch { /* sem armazenamento: versão completa */ }
+    const MIN = seen ? 0.8 : 1.7; // segundos mínimos para a frase ser lida
+    const GAP = seen ? 0.045 : innerWidth < 600 ? 0.12 : 0.09; // intervalo entre cortes (mais calmo no celular)
+
+    // a rolagem fica parada, sem esconder a barra (o layout não pula)
+    const keys = new Set([' ', 'PageDown', 'PageUp', 'ArrowDown', 'ArrowUp', 'Home', 'End']);
+    const stopWheel = (e) => e.preventDefault();
+    const stopKeys = (e) => { if (keys.has(e.key)) e.preventDefault(); if (e.key === 'Escape') finish(); };
+    addEventListener('wheel', stopWheel, { passive: false });
+    addEventListener('touchmove', stopWheel, { passive: false });
+    addEventListener('keydown', stopKeys);
+    if (smoother) smoother.paused(true);
+    const unblock = () => {
+      removeEventListener('wheel', stopWheel);
+      removeEventListener('touchmove', stopWheel);
+      removeEventListener('keydown', stopKeys);
+      if (smoother) smoother.paused(false);
+    };
+
+    const line = $('.loader__line', loaderEl);
+    const note = $('[data-loader-note]', loaderEl);
+    const words = $$('.loader__w', loaderEl);
+    const fillers = words.filter((w) => !w.classList.contains('is-key'));
+    const t0 = performance.now();
+
+    // o que a página realmente espera
+    const wait = (promise, ms) => Promise.race([promise, new Promise((r) => setTimeout(r, ms))]);
+    const tasks = [
+      { label: 'Carregando as fontes', p: document.fonts ? document.fonts.ready : Promise.resolve() },
+      { label: 'Carregando as imagens', p: document.readyState === 'complete' ? Promise.resolve() : new Promise((r) => addEventListener('load', r, { once: true })) },
+      { label: 'Montando as cenas 3D', p: new Promise((r) => { if (window.__opus3dReady) r(); else addEventListener('opus:3d-ready', r, { once: true }); }) },
+    ];
+    tasks.forEach((t) => { t.done = false; wait(t.p, 4500).then(() => { t.done = true; }); });
+
+    let resolveDone;
+    const done = new Promise((r) => { resolveDone = r; });
+    done.then(announceLoaded);
+    let removed = 0;
+    let lastCut = 0;
+    let finished = false;
+
+    const visibleWords = () => words.filter((w) => !w.classList.contains('is-gone'));
+    const cut = (w) => {
+      w.classList.add('is-cut');
+      G.to(w, {
+        autoAlpha: 0, duration: 0.16, delay: 0.08, ease: 'power1.in',
+        onComplete: () => {
+          const state = Flip.getState(visibleWords());
+          w.classList.add('is-gone');
+          Flip.from(state, { duration: 0.55, ease: 'opusOut', overwrite: 'auto' });
+        },
+      });
+    };
+
+    const collapse = () => {
+      const slot = $('.hero__slot');
+      const r = slot.getBoundingClientRect();
+      const box = loaderEl.getBoundingClientRect();
+      const inView = r.width > 40 && r.bottom > 0 && r.top < innerHeight;
+      const tl = G.timeline({
+        onComplete: () => { loaderEl.remove(); unblock(); ScrollTrigger.refresh(); },
+      });
+      tl.to('.loader__foot', { autoAlpha: 0, duration: 0.25 }, 0);
+      if (inView) {
+        // "Opus 5.5" vai para dentro da faixa, e a tela escura encolhe até ela
+        const lr = line.getBoundingClientRect();
+        const scale = Math.min(1, (r.height * 0.46) / lr.height, (r.width * 0.8) / lr.width);
+        tl.to(line, {
+          x: r.left + r.width / 2 - (lr.left + lr.width / 2),
+          y: r.top + r.height / 2 - (lr.top + lr.height / 2),
+          scale, duration: 1.05, ease: 'opusInOut',
+        }, 0.1)
+          .fromTo(loaderEl, { clipPath: 'inset(0px 0px 0px 0px round 0px)' }, {
+            clipPath: `inset(${r.top - box.top}px ${box.right - r.right}px ${box.bottom - r.bottom}px ${r.left - box.left}px round 14px)`,
+            duration: 1.1, ease: 'opusInOut',
+          }, 0.1)
+          .add(() => resolveDone(true), 0.35)
+          .to(line, { autoAlpha: 0, duration: 0.3 }, 1.05);
+      } else {
+        tl.to(loaderEl, { autoAlpha: 0, duration: 0.45 }, 0).add(() => resolveDone(true), 0);
+      }
+    };
+
+    function tick() {
+      const el = (performance.now() - t0) / 1000;
+      const ready = tasks.filter((t) => t.done).length;
+      const timeFrac = Math.min(1, el / MIN);
+      const frac = ready === tasks.length ? timeFrac : Math.min(timeFrac, (ready / tasks.length) * 0.85 + timeFrac * 0.1);
+      const target = Math.floor(frac * fillers.length);
+      const pending = tasks.find((t) => !t.done);
+      note.textContent = pending ? pending.label : 'Cortando a enrolação';
+      if (removed < target && el - lastCut >= GAP) { cut(fillers[removed]); removed += 1; lastCut = el; }
+      if (removed >= fillers.length && ready === tasks.length && el - lastCut > 0.35) finish();
+    }
+
+    function finish() {
+      if (finished) return;
+      finished = true;
+      G.ticker.remove(tick);
+      note.textContent = 'Pronto';
+      // o que ainda sobrou de enrolação sai de uma vez
+      const rest = fillers.filter((w) => !w.classList.contains('is-gone'));
+      if (rest.length) {
+        G.killTweensOf(rest);
+        const state = Flip.getState(visibleWords());
+        rest.forEach((w) => w.classList.add('is-gone'));
+        Flip.from(state, { duration: 0.45, ease: 'opusOut', overwrite: 'auto' });
+        G.delayedCall(0.5, collapse);
+      } else G.delayedCall(0.2, collapse);
+    }
+
+    G.ticker.add(tick);
+    $('[data-loader-skip]', loaderEl).addEventListener('click', finish);
+    setTimeout(finish, 8000);
+    return done;
+  })();
+
+  /* ------------------------------------------------------------
      A faixa do título: tarefas reais do anúncio, uma por vez
      ------------------------------------------------------------ */
   const tickerItems = $$('.strip__item');
@@ -330,11 +467,15 @@
     // 1. Abertura em 1,2 s: o nome sobe, a faixa abre como obturador
     const heroWords = $$('[data-hero-word]');
     const split = SplitText.create(heroWords, { type: 'chars', mask: 'chars' });
-    G.timeline({ defaults: { ease: 'opusOut' } })
+    const heroIn = G.timeline({ defaults: { ease: 'opusOut' }, paused: true })
       .from(split.chars, { yPercent: 115, duration: 1, stagger: 0.035 }, 0.05)
-      .fromTo('.hero__slot', { clipPath: 'inset(0% 50% 0% 50% round 14px)' }, { clipPath: 'inset(0% 0% 0% 0% round 14px)', duration: 1.1, ease: 'opusInOut' }, 0.1)
       .from('.hero__lead, .hero__cta', { y: 16, autoAlpha: 0, duration: 0.6, stagger: 0.07 }, 0.45)
       .from(top.children, { autoAlpha: 0, y: -12, duration: 0.5, stagger: 0.05 }, 0.35);
+    loaderDone.then((viaLoader) => {
+      // sem preloader, a faixa abre como obturador; com ele, a faixa já é a tela que encolheu
+      if (!viaLoader) heroIn.fromTo('.hero__slot', { clipPath: 'inset(0% 50% 0% 50% round 14px)' }, { clipPath: 'inset(0% 0% 0% 0% round 14px)', duration: 1.1, ease: 'opusInOut' }, 0.1);
+      heroIn.play();
+    });
 
     // Revelação segura: o estado inicial só é aplicado quando o elemento está
     // prestes a entrar na tela (borda de baixo), e a animação toca logo depois.
@@ -454,7 +595,7 @@
 
     // a conversa fica escondida enquanto a faixa abre na carga da página
     G.set(demo, { autoAlpha: 0 });
-    G.delayedCall(1.15, () => G.set(demo, { autoAlpha: 1 }));
+    loaderDone.then(() => G.delayedCall(1.15, () => G.set(demo, { autoAlpha: 1 })));
 
     const tl = G.timeline({
       defaults: { ease: 'none' },

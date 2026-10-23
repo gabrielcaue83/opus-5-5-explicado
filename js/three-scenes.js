@@ -160,7 +160,9 @@ function heroTokens() {
     });
   };
   const inZone = (x, y) => zones.some((z) => x > z.x0 && x < z.x1 && y > z.y0 && y < z.y1);
-  const born = performance.now() / 1000;
+  // os tokens aparecem só depois do preloader
+  let born = window.__opusLoaded || !document.querySelector('[data-loader]') ? performance.now() / 1000 : Infinity;
+  addEventListener('opus:loaded', () => { born = performance.now() / 1000; }, { once: true });
 
   function draw(dt, t) {
     // o quanto a janela já se abriu (só na cena de rolagem do desktop)
@@ -465,11 +467,20 @@ function paperStack() {
   runWhileVisible(stage, draw);
 }
 
+// avisa o preloader que as cenas 3D estão montadas (ou que não há 3D neste aparelho)
+function signalReady() {
+  window.__opus3dReady = true;
+  dispatchEvent(new Event('opus:3d-ready'));
+}
+
+if (!hasGL) signalReady();
+
 if (hasGL) {
   root.classList.add('has-webgl');
   const start = () => {
     try { heroTokens(); } catch (err) { console.warn('Cena dos tokens não iniciou:', err); }
     try { paperStack(); } catch (err) { console.warn('Cena da pilha não iniciou:', err); }
+    signalReady();
   };
   // os rótulos 3D usam a fonte Barlow: espera ela carregar (no máximo 1,5 s)
   const fontsReady = document.fonts ? Promise.race([document.fonts.load('600 64px Barlow'), new Promise((r) => setTimeout(r, 1500))]) : Promise.resolve();

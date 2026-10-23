@@ -16,6 +16,7 @@ Depois acesse http://localhost:5174.
 
 ## O que tem na página
 
+- **Preloader:** uma frase cheia de enrolação ("Ótima pergunta! Antes de tudo, vale lembrar que...") perde uma palavra a cada passo real do carregamento (fontes, imagens e cenas 3D) até sobrar "Opus 5.5". Depois, a tela escura encolhe e vira a faixa do título. Tem botão Pular (ou Esc), é mais curto quando a pessoa volta na mesma sessão e não aparece com movimento reduzido nem em links diretos para uma seção.
 - **Abertura:** o nome com uma faixa que mostra tarefas reais do anúncio. Atrás dele, em 3D, flutuam pedaços de palavras (tokens), que reagem ao mouse e são puxados pela faixa quando ela se abre na tela inteira.
 - **Menos papo, mais resposta:** a mesma resposta encolhe de 57 para 21 palavras (exemplo ilustrativo do estilo).
 - **Família Claude:** Haiku, Sonnet, Opus e Fable, com preços e datas.

@@ -15,6 +15,19 @@
 </head>
 <body>
 
+<!-- Preloader: a enrolação é cortada enquanto a página carrega -->
+<div class="loader" data-loader role="status" aria-label="Carregando a página">
+  <p class="loader__line" aria-hidden="true"><span class="loader__w">Ótima</span> <span class="loader__w">pergunta!</span> <span class="loader__w">Antes</span> <span class="loader__w">de</span> <span class="loader__w">tudo,</span> <span class="loader__w">vale</span> <span class="loader__w">lembrar</span> <span class="loader__w">que,</span> <span class="loader__w">em</span> <span class="loader__w">resumo,</span> <span class="loader__w">basicamente,</span> <span class="loader__w">o</span> <span class="loader__w">que</span> <span class="loader__w">chegou</span> <span class="loader__w">foi</span> <span class="loader__w">o</span> <span class="loader__w is-key">Opus</span> <span class="loader__w is-key">5.5</span></p>
+  <div class="loader__foot">
+    <span class="loader__note" data-loader-note>Cortando a enrolação</span>
+    <button type="button" class="loader__skip" data-loader-skip>Pular</button>
+  </div>
+</div>
+<script>
+  // segurança: se algo falhar, o preloader sai sozinho em 9 s
+  setTimeout(function () { var l = document.querySelector('[data-loader]'); if (l && !window.__opusLoaded) { l.remove(); window.__opusLoaded = true; window.dispatchEvent(new Event('opus:loaded')); } }, 9000);
+</script>
+
 <header class="top" data-top data-theme="orange">
   <a class="top__mark" href="#topo">Opus 5.5, explicado</a>
   <nav class="top__nav" aria-label="Seções">
